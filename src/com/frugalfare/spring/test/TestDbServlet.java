@@ -1,4 +1,4 @@
-package com.mycapstone.testdb;
+package com.frugalfare.spring.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
