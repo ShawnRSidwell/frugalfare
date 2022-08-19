@@ -108,39 +108,43 @@ public class SearchController {
 	@PostMapping("/saveRide")
 	public String saveRide(@ModelAttribute("ride") Ride ride, HttpSession session, Model theModel) {
 
-		// Gets user from http session.
+		// Gets user from HTTP session.
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 
-		// checks if user is logged in, if so associates ride to login.
+		// Checks if user is logged in, if so associates ride to login.
 		if (loggedInUser == null) {
 			ride.setUser(null);
 		} else {
 			ride.setUser(loggedInUser);
 		}
 
-		// get starting address and ending address from model
+		// Get starting address and ending address from model
 		String startPoint;
 		String endPoint;
 		startPoint = ride.getStartAddress();
 		endPoint = ride.getEndAddress();
 
-		// get long/lat of each point
+		// Get longitude/latitude of each point
 		AddressSearch search = new AddressSearch();
 		double lat1;
 		double long1;
 		double lat2;
 		double long2;
+		
+		//If unable to find starting point send error
 		try {
 			lat1 = search.getLocationLat(startPoint);
 			long1 = search.getLocationLong(startPoint);
 		} catch (IndexOutOfBoundsException e) {
-			// create model attribute to bind form data
-			// add empty user to the model
+		
+			// Create model attribute to bind form data
+			// Add empty user to the model
 			theModel.addAttribute("ride", new Ride());
 			theModel.addAttribute("SearchError", "Unable to find starting location.");
 			return "home";
 		}
-
+		
+		//If unable to find end point send error
 		try {
 			lat2 = search.getLocationLat(endPoint);
 			long2 = search.getLocationLong(endPoint);
@@ -149,16 +153,15 @@ public class SearchController {
 			theModel.addAttribute("SearchError", "Unable to find final destination.");
 			return "home";
 		}
+		
 		// get full address names from API
 		String location1 = search.getDisplayName(startPoint);
 		String location2 = search.getDisplayName(endPoint);
 
 		// calculate distance (in miles) between the two locations.
 		double miles = DistanceConverter.distance(lat1, long1, lat2, long2);
-		// Set display, coordinates, distance and cost to model.
-
-		FareCalculator fareCalc = new FareCalculator();
-
+		
+		// Set display, coordinates, distance to model
 		ride.setStartAddress(location1);
 		ride.setEndAddress(location2);
 		ride.setLat1(lat1);
@@ -166,6 +169,9 @@ public class SearchController {
 		ride.setLat2(lat2);
 		ride.setLong2(long2);
 		ride.setMiles(Math.floor(miles * 100) / 100.00);
+		
+		//Calculate the fares
+		FareCalculator fareCalc = new FareCalculator();
 		ride.setTaxiPrice(fareCalc.calculateTaxiFare(miles));
 		ride.setLyftPrice(fareCalc.calculateLyftFare(miles));
 		ride.setUberPrice(fareCalc.calculateUberFare(miles));

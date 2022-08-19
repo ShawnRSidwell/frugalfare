@@ -67,7 +67,6 @@
                     <th scope="col">Id</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Password</th>
                     <th scope="col">Email</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -89,7 +88,6 @@
 						<th scope="row">${tempUser.id}</th>
                         <td> ${tempUser.firstName} </td>
                         <td> ${tempUser.lastName} </td>
-						<td> ${tempUser.password} </td>
 						<td> ${tempUser.email} </td>
 
 						<td>

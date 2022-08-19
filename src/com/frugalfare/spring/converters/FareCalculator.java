@@ -6,14 +6,14 @@ public class FareCalculator {
 		double baseFare = .45;
 		double costPerMile = .88 * miles;
 
-		// takes average speed limit of 40 miles/hour and converts it to minutes and
-		// multiplies times miles.
+		// Takes average speed limit of 40 miles/hour and converts it to minutes and multiplies by miles.
 		double costPerMinute = 40.00 / 60.00 * miles * .19;
 		double serviceFee = 3.40;
-
+		
+		//Calculate total fare
 		double totalFare = Math.floor((baseFare + costPerMile + costPerMinute + serviceFee) * 100) / 100.00;
 
-		// calculates min fare
+		// Calculates min fare
 		if (totalFare <= 3.76) {
 			return 3.76;
 		}
@@ -32,8 +32,7 @@ public class FareCalculator {
 		double baseFare = .43;
 		double costPerMile = .88 * miles;
 
-		// takes average speed limit of 40 miles/hour and converts it to minutes and
-		// multiplies times miles.
+		// takes average speed limit of 40 miles/hour and converts it to minutes and multiplies by miles.
 		double costPerMinute = 40.00 / 60.00 * miles * .19;
 		double serviceFee = 2.89;
 
@@ -48,6 +47,7 @@ public class FareCalculator {
 	}
 
 	public double calculateTaxiFare(double miles) {
+		
 		// BaseFare is between 2.50 to 3.50. Using random number in that range
 		double baseFare = Math.random() * (3.50 - 2.50) + 2.50;
 

@@ -80,7 +80,7 @@
         
                       <!-- Email input -->
                       <div class="form-outline mb-4">
-                        <form:input path="email" class="form-control" placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        <form:input path="email" class="form-control" placeholder="Email Address"/>
                       </div>
         
                       <!-- Password input -->

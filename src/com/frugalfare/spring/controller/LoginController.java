@@ -29,35 +29,42 @@ public class LoginController {
 
 	@Autowired
 	private PasswordEncoder encoder;
-
+	
+	
+	//Get login page.
 	@GetMapping("/login")
 	public String showLoginForm(Model theModel) {
 		theModel.addAttribute("user", new User());
 		return "login";
 	}
-
+	
+	//Check the database to see if the client logged in correctly
 	@PostMapping("/login")
 	public String verifyLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session, Model theModel) {
 
-		// first get user
+		// Find user by their email
 		User user = userService.findUserByEmail(email);
-
+		
+		//Check if user exists or if the client has typed in the correct matching password
 		if (user == null || !encoder.matches(password, user.getPassword())) {
 			theModel.addAttribute("loginError", "Error logging in. Please try again");
 			theModel.addAttribute("user", new User());
 			return "login";
 		}
+		
+		//Add logged in user to session. 
 		session.setAttribute("loggedInUser", user);
 		return "redirect:/search";
 	}
-
+	
+	//Remove logged in user from Session
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loggedInUser");
 		return "redirect:/search";
 	}
-
+	
 	@GetMapping("/updateAccount")
 	public String updateAccount(@RequestParam("userId") int theId, Model theModel) {
 
@@ -86,14 +93,16 @@ public class LoginController {
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute("user") User theUser, HttpSession session) {
 		
-		
+		//Encrypt their password useing Bcrypt
 		String protectedPassword = encoder.encode(theUser.getPassword());
-		System.out.println(protectedPassword);
-
+		
+		//Save the user's password to the model 
 		theUser.setPassword(protectedPassword);
-		// save the user using our service
+		
+		//Save the user using our Service
 		userService.saveUser(theUser);
-
+		
+		//Keep the recently added user logged in
 		session.setAttribute("loggedInUser", theUser);
 
 		return "redirect:/search";

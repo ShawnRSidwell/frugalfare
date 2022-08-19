@@ -73,8 +73,8 @@
           <div class="container-fluid py-5">
             <div>
               <h1 class="display-5 fw-bold">What are we?</h1>
-              <p style="width: 100%; text-align: justify;" class="col-md-8 fs-4">Frugal fare is a simple service to navigate the many popular ridesharing applications available and find the cheapest option available. We partner with OpenStreetMap api to find your location and destination and calculate the distance between. This is then inputted into our special Frugal Fare rideshare calculator. This calculator will then compute the date and return the price for each ride. With this information, the rest if up to you to go out, schedule your ride and enjoy your trip! </p>
-              <button class="btn btn-dark btn-lg" type="button">Try it out!</button>
+              <p style="width: 100%; text-align: justify;" class="col-md-8 fs-4">Frugal fare is a simple service to navigate the many popular ridesharing applications available and find the cheapest option available. We partner with OpenStreetMap api to find your location and destination and calculate the distance between. This is then inputted into our special Frugal Fare rideshare calculator. This calculator will then compute the data and return the price for each ride. With this information, the rest if up to you to go out, schedule your ride and enjoy your trip! </p>
+              <a href = " ${pageContext.request.contextPath}/search"><button class="btn btn-dark btn-lg" type="button">Try it out!</button></a>
             </div>
           </div>
            </div>

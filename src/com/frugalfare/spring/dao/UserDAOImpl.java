@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// save/update the user....Finally LOL
+		// save/update the user
 		currentSession.saveOrUpdate(theUser);
 	}
 
