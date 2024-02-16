@@ -25,7 +25,7 @@ The Ride-Share Price Simulator is a web application that utilizes geo-location t
 
 ### Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/your-username/ride-share-price-simulator.git`
+1. Clone the repository: `git clone https://github.com/ShawnRSidwell/frugalfare.git`
 2. Set up the Apache Server to host the web application files.
 3. Configure the backend Java server to handle geo-location requests and calculate ride prices.
 4. Customize the application as needed, such as integrating with specific ride-sharing APIs or adjusting pricing algorithms.
